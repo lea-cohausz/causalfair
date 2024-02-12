@@ -9,15 +9,16 @@ For R:
 - bnlearn
 
 For Python:
-- lingam
-- numpy
-- sklearn
-- scipy
-- pgmpy
-- pandas
-- networkx
-- matplotlib
-- subprocess
+- lingam==1.8.2
+- numpy==1.24.4
+- sklearn==1.2.2
+- scipy==1.10.1
+- pgmpy==0.1.20
+- pandas==1.5.3
+- networkx==2.8.8
+- matplotlib==3.7.4
+
+*causalfair* should be upwards compatible, so it should not be a problem if you have newer versions.
 
 ### Example
 ExampleNotebook.ipynb displays the most important functionalities of causalfair.
