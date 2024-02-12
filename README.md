@@ -1,6 +1,6 @@
 ## causalfair
 
-This is the repository to the Python package *causalfair*. 
+This is the repository to the Python package *causalfair*. It can learn DAGs using background knowledge and identify which variables might be problematic when we learn ML models on the data.
 
 ### Requirements
 To run *causalfair*, simply download or clone the folder and make sure that R and Python are installed on your computer and you installed the following requirements.
