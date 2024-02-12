@@ -3,7 +3,7 @@
 This is the repository to the Python package *causalfair*. 
 
 ### Requirements
-To run *causalfair*, simply download or clone the folder and make sure that R are Python are installed on your computer and you installed the following requirements.
+To run *causalfair*, simply download or clone the folder and make sure that R and Python are installed on your computer and you installed the following requirements.
 
 For R:
 - bnlearn
