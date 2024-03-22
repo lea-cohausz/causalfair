@@ -21,7 +21,7 @@ For Python:
 *causalfair* should be upwards compatible, so it should not be a problem if you have newer versions.
 
 ### Example
-ExampleNotebook.ipynb displays the most important functionalities of causalfair.
+ExampleNotebook.ipynb in in the causalfair folder displays the most important functionalities of causalfair. 
 
 ### Documentation
 
