@@ -367,7 +367,7 @@ def remove_sublists(adjacency_matrix):
 def identify_structures(adjacency_matrix, nodes, sensitive_variables, target_variable, draw_problematic = False):
     '''
     Takes as input the adjacency list produced before, a list of nodes with the same order as the variables are in the 
-    adjancency matrix, a list of sensitive variables, and the target variable.
+    adjacency matrix, a list of sensitive variables, and the target variable.
     It first uses the DFS algorithm and removes the encompassed paths and from the result finds 
     a) potentially problematic structures and
     b) structures that might indicate a missing variable that we can specifically ask for.
@@ -391,19 +391,35 @@ def identify_structures(adjacency_matrix, nodes, sensitive_variables, target_var
             problematic_structures.append(a_structure)
         else:
             effect_indirect = []
-            for struc in a_structure:
+            for ai in range(len(a_structure)):
+                struc = a_structure[ai]
                 a_ix = nodes.index(a)
                 b_ix = nodes.index(struc[1])
-                val = adjacency_matrix[a_ix][b_ix]
+                c_ix = nodes.index(struc[-1])
+                val1 = adjacency_matrix[a_ix][b_ix]
+                val2 = adjacency_matrix[b_ix][c_ix]
                 if len(struc) == 2:
-                    effect_direct = val
+                    effect_direct = val1
                 else:
-                    effect_indirect.append(val)
-            if effect_direct == 1 and effect_indirect[0] == -1: 
-                ask_for_hidden.append(a_structure)
-            elif effect_direct == -1 and effect_indirect[0] == 1:
-                ask_for_hidden.append(a_structure)
-            else: problematic_structures.append(a_structure)
+                    ix1 = a_ix
+                    vals_path = []
+                    for s in range(1, len(struc)):
+                        con = struc[s]
+                        ix2 = nodes.index(con)
+                        valx = adjacency_matrix[ix1][ix2]
+                        vals_path.append(valx)
+                        ix1 = ix2
+                    effect_indirect.append((ai, vals_path))
+
+            # neu
+            for i in range(len(effect_indirect)):
+                ef = effect_indirect[i][1]
+                if effect_direct == 1 and all(e == -1 for e in ef):
+                    ask_for_hidden.append([a_structure[i]])
+                elif effect_direct == -1 and all(e == 1 for e in ef):
+                    ask_for_hidden.append([a_structure[i]])
+                else:
+                    problematic_structures.append([a_structure[i]])
 
     # the new part
     problematic_variables = []
@@ -446,7 +462,7 @@ def identify_structures(adjacency_matrix, nodes, sensitive_variables, target_var
                         break
                 if found == True:
                     break
-    
+
     no_connection_variables = [elem for elem in sensitive_variables if elem not in problematic_variables and elem not in hidden_variables and elem not in blocked_variables]
     structures = dag_structures(flattened_structures_found_p, flattened_structures_found_v, problematic_variables, hidden_variables, blocked_variables, no_connection_variables)
 
@@ -472,7 +488,7 @@ def draw_ground_truth_graph(edges):
     plt.show()
 
 
-def compare_dags(dag, edges):
+def compare_to_groundtruth(dag, edges):
     '''
     Outputs a comparison between the ground truth graph and the predicted graph
     '''
@@ -497,5 +513,38 @@ def compare_dags(dag, edges):
     print(f"Wrong Edges: {len(wrong_edges)}")
     print(f"Missing Edges: {len(missing_edges)}")
     return correct_edges, wrong_edges, missing_edges, len(edges)
+
+def compare_dags(dag1, dag2):
+    '''
+    Outputs a comparison between two DAGs. Compares the second against the first.
+    '''
+    G1 = nx.DiGraph()
+    nodes1 = dag1[1]
+    adjacency_matrix1 = dag1[0]
+    G1.add_nodes_from(nodes1)
+
+    for i in range(len(nodes1)):
+        for j in range(len(nodes1)):
+            if adjacency_matrix1[i, j] != 0:
+                G1.add_edge(nodes1[i], nodes1[j])
+
+    G2 = nx.DiGraph()
+    nodes2 = dag2[1]
+    adjacency_matrix2 = dag2[0]
+    G2.add_nodes_from(nodes2)
+
+    for i in range(len(nodes2)):
+        for j in range(len(nodes2)):
+            if adjacency_matrix2[i, j] != 0:
+                G2.add_edge(nodes2[i], nodes2[j])
+
+    correct_edges = set(G2.edges()) & set(G1.edges())
+    wrong_edges = set(G2.edges()) - set(G1.edges())
+    missing_edges = set(G1.edges()) - set(G2.edges())
+
+    print(f"Matching Edges: {len(correct_edges)}")
+    print(f"Edges DAG2 has DAG1 has not: {len(wrong_edges)}")
+    print(f"Edges DAG1 has DAS2 has not: {len(missing_edges)}")
+    return correct_edges, wrong_edges, missing_edges
 
 
