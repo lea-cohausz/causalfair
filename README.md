@@ -50,9 +50,12 @@ Attributes of the objects can be called using these keywords:
 - blocked: returns a list of blocked demographic variables
 - not_connected: returns a list of demographic variables with no connection
 
+**compare_dags((adjacency_matrix, nodes), (adjacency_matrix, nodes))**
+This function compares two DAGs with identical sets of nodes against each other. It takes the adjacency matrices of both.
+It returns information on matching edges, edges that are present in DAG2 but not DAG 1, and vice versa.
 
-**compare_dags((adjacency_matrix, nodes), edges)**
-This function compares two DAGs with identical sets of nodes against each other. It takes the adjacency matrix from one node and a list of edges from the other. It is designed to compare a learned DAG to a ground truth where the adjacency matrix is from the learned graph.
+**compare_to_groundtruth((adjacency_matrix, nodes), edges)**
+This function compares two DAGs (one is the ground truth DAG) with identical sets of nodes against each other. It takes the adjacency matrix from one node and a list of edges from the other (the ground truth). It is designed to compare a learned DAG to a ground truth where the adjacency matrix is from the learned graph.
 It returns information on correctly found, incorrectly found, and missing edges.
 
 **draw_dag(adjacency_matrix,nodes)**
