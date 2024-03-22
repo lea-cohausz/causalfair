@@ -22,6 +22,7 @@ For Python:
 
 ### Example
 ExampleNotebook.ipynb in in the causalfair folder displays the most important functionalities of causalfair. 
+In the OULAD_Example-folder, you can find an example with real life data. Open the Jupyter Nottebook for more information.
 
 ### Documentation
 
