@@ -13,13 +13,13 @@ import matplotlib.pyplot as plt
 import subprocess
 
 class dag_structures:
-    def __init__(self, flattened_structures_found_p, flattened_structures_found_v, problematic_variables, hidden_variables, blocked_variables, no_connection_variables):
+    def __init__(self, flattened_structures_found_p, flattened_structures_found_v, problematic_variables, hidden_variables, blocked_variables, unproblematic_variables):
         self.problematic_structures = flattened_structures_found_p
         self.problematic_variables = problematic_variables
         self.missing_structures = flattened_structures_found_v
         self.missing = hidden_variables
         self.blocked = blocked_variables
-        self.not_connected = no_connection_variables
+        self.not_connected = unproblematic_variables
 
 
 
