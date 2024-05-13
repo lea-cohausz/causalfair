@@ -16,10 +16,10 @@ class dag_structures:
     def __init__(self, flattened_structures_found_p, flattened_structures_found_v, problematic_variables, hidden_variables, blocked_variables, unproblematic_variables):
         self.problematic_structures = flattened_structures_found_p
         self.problematic_variables = problematic_variables
-        self.missing_structures = flattened_structures_found_v
-        self.missing = hidden_variables
+        self.opp_effects_structures = flattened_structures_found_v
+        self.opp_effects = hidden_variables
         self.blocked = blocked_variables
-        self.not_connected = unproblematic_variables
+        self.unproblematic = unproblematic_variables
 
 
 
