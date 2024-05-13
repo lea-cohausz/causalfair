@@ -49,7 +49,7 @@ Attributes of the objects can be called using these keywords:
 - opp_effects_structures: returns a list of the paths that indicates opposing effects making it probelmatic to remove the variable
 - opp_effects: returns a list of demographic variables that are affected by this variable
 - blocked: returns a list of blocked demographic variables
-- not_connected: returns a list of demographic variables with no connection
+- unproblematic: returns a list of demographic variables with no connection
 
 **compare_dags((adjacency_matrix, nodes), (adjacency_matrix, nodes))**
 This function compares two DAGs with identical sets of nodes against each other. It takes the adjacency matrices of both.
