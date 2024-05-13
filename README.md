@@ -46,8 +46,8 @@ Optionally, one can specify whether DAG should be drawn with problematic structu
 Attributes of the objects can be called using these keywords:
 - problematic_structures: returns a list of problematic paths found. 
 - problematic_variables: returns a list of the problematic demographic variables
-- missing_structures: returns a list of the paths that indicate a missing variable
-- missing: returns a list of demographic variables that are affected by these missing variables
+- opp_effects_structures: returns a list of the paths that indicates opposing effects making it probelmatic to remove the variable
+- opp_effects: returns a list of demographic variables that are affected by this variable
 - blocked: returns a list of blocked demographic variables
 - not_connected: returns a list of demographic variables with no connection
 
